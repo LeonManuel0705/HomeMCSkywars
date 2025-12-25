@@ -1,0 +1,27 @@
+# SkyWars Configuration
+
+game:
+  # Minimale Anzahl an Spielern zum Starten
+  min-players: 2
+
+  # Maximale Anzahl an Spielern
+  max-players: 12
+
+  # Lobby Countdown in Sekunden
+  lobby-time: 60
+
+  # Chest Refill Zeit in Sekunden
+  chest-refill-time: 180
+
+rewards:
+  # Coins für einen Sieg
+  win: 50
+
+  # Coins pro Kill
+  kill: 5
+
+# Spawns werden hier automatisch gespeichert
+spawns: []
+
+# Lobby-Spawn wird hier automatisch gespeichert
+lobby-spawn: ""

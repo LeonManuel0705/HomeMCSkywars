@@ -1,0 +1,112 @@
+name: SkyWars
+version: 1.0.0
+main: me.leon.skywars.SkyWars
+author: Leon
+depend: [Core]
+api-version: 1.8
+
+commands:
+  start:
+    description: Startet ein neues SkyWars Spiel
+
+  forcestart:
+    description: Beschleunigt den Countdown
+    aliases: [fs]
+
+  stop:
+    description: Stoppt das aktuelle Spiel
+
+  setlobby:
+    description: Setzt den Lobby-Spawn
+
+  arena:
+    description: Arena-Verwaltung
+    usage: |
+      /arena create <name>
+      /arena delete <name>
+      /arena list
+      /arena info <name>
+      /arena setpos1 <name>
+      /arena setpos2 <name>
+      /arena setlobby <name>
+      /arena setspectator <name>
+      /arena addspawn <name>
+      /arena removespawn <name> <ID>
+      /arena clearspawns <name>
+      /arena setmode <name> <SOLO/DUOS/TRIOS/SQUADS>
+      /arena scan <name>    
+
+  addspawn:
+    description: Fügt einen Spieler-Spawn hinzu
+
+  removespawn:
+    description: Entfernt einen Spieler-Spawn
+
+  listspawns:
+    description: Zeigt alle Spawns an
+
+  swstats:
+    description: Zeigt SkyWars Statistiken
+    usage: /swstats [Spieler]
+    aliases: [stats]
+
+  swkit:
+    description: Öffnet die Kit-Auswahl
+    usage: /swkit
+    aliases: [kit]
+
+  build:
+    description: Aktiviert den Build-Modus
+
+permissions:
+  skywars.start:
+    description: Erlaubt das Starten von Spielen
+    default: op
+
+  skywars.forcestart:
+    description: Erlaubt ForceStart
+    default: op
+
+  skywars.stop:
+    description: Erlaubt das Stoppen von Spielen
+    default: op
+
+  skywars.setup:
+    description: Erlaubt Setup-Befehle
+    default: op
+
+  skywars.lobby.build:
+    description: Erlaubt Build-Modus
+    default: op
+
+  skywars.vote.time:
+    description: Erlaubt Abstimmung über Zeit
+    default: false
+
+  skywars.vote.weather:
+    description: Erlaubt Abstimmung über Wetter
+    default: false
+
+  skywars.vote.chest:
+    description: Erlaubt Abstimmung über Truhen-Level
+    default: false
+
+  skywars.kit.warrior:
+    description: Krieger Kit
+    default: true
+
+  skywars.kit.archer:
+    description: Schützen Kit
+    default: true
+
+  skywars.kit.tank:
+    description: Tank Kit
+    default: true
+
+  skywars.kit.scout:
+    description: Kundschafter Kit
+    default: true
+
+  skywars.kit.miner:
+    description: Bergarbeiter Kit
+    default: true

@@ -1,0 +1,11 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="HomeMCSkywars:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/HomeMCSkywars_jar</output-path>
+    <root id="archive" name="HomeMCSkywars.jar">
+      <element id="module-output" name="HomeMCSkywars" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/protobuf/protobuf-java/3.21.9/protobuf-java-3.21.9.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar" path-in-jar="/" />
+      <element id="library" level="project" name="com" />
+    </root>
+  </artifact>
+</component>

@@ -31,7 +31,6 @@ public class PlayerInteractListener implements Listener {
 
         String displayName = item.getItemMeta().getDisplayName();
 
-        // Lobby Items (wenn Spieler in der Lobby ist)
         if (plugin.getLobbyManager().isInLobby(player.getUniqueId())) {
             event.setCancelled(true);
 

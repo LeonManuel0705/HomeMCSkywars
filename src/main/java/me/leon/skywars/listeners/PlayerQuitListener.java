@@ -19,22 +19,17 @@ public class PlayerQuitListener implements Listener {
         Player player = event.getPlayer();
         event.setQuitMessage(null);
 
-        // Aus Lobby entfernen
         if (plugin.getLobbyManager().isInLobby(player.getUniqueId())) {
             plugin.getLobbyManager().removeFromLobby(player.getUniqueId());
         }
 
-        // Aus Spiel entfernen
         if (plugin.getGameManager().isInGame(player)) {
             plugin.getGameManager().removePlayer(player);
         }
 
-        // Aus Spectator entfernen
         if (plugin.getSpectatorManager().isSpectator(player.getUniqueId())) {
             plugin.getSpectatorManager().removeSpectator(player);
         }
 
-        // Stats aus Cache entfernen (werden automatisch in DB gespeichert durch addStat Methoden)
-        // Kein manuelles saveStats() nötig, da StatsManager async updates macht
     }
 }

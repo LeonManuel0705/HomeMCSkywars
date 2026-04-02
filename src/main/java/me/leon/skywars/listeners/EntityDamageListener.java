@@ -6,7 +6,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 
-// EntityDamageListener.java
 public class EntityDamageListener implements Listener {
     private final SkyWars plugin;
 

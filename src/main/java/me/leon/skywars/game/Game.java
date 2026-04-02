@@ -43,7 +43,6 @@ public class Game {
         this.gameTimer = 0;
         this.chestRefillTimer = CHEST_REFILL_TIME;
 
-        // Arena beim ChestManager setzen
         plugin.getChestManager().setCurrentArena(arena);
     }
 
@@ -123,10 +122,8 @@ public class Game {
         state = GameState.INGAME;
         gameTimer = 0;
 
-        // Voting auswerten
         plugin.getVoteManager().applyVotes();
 
-        // Spieler zu Spawns teleportieren
         List<Location> spawns = new ArrayList<>(arena.getSpawns());
         Collections.shuffle(spawns);
 
@@ -137,16 +134,13 @@ public class Game {
             Player p = Bukkit.getPlayer(gp.getUuid());
             if (p == null || !p.isOnline()) continue;
 
-            // Aus Lobby entfernen
             plugin.getLobbyManager().removeFromLobby(gp.getUuid());
 
             Location spawn = spawns.get(spawnIndex % spawns.size());
             p.teleport(spawn);
 
-            // Kit geben
             plugin.getKitManager().giveKit(p, gp.getSelectedKit());
 
-            // Spieler vorbereiten
             p.setGameMode(GameMode.SURVIVAL);
             p.setHealth(20.0);
             p.setFoodLevel(20);
@@ -160,7 +154,6 @@ public class Game {
             spawnIndex++;
         }
 
-        // Chests füllen
         plugin.getChestManager().fillChests();
 
         broadcast("§8§m                                    ");
@@ -179,7 +172,6 @@ public class Game {
     private void tickIngame() {
         gameTimer++;
 
-        // Chest Refill
         if (gameTimer > 0 && gameTimer % CHEST_REFILL_TIME == 0) {
             plugin.getChestManager().refillChests();
             broadcast("§6§lCHEST REFILL!");
@@ -187,7 +179,6 @@ public class Game {
             playSound(Sound.LEVEL_UP, 1.0f, 1.0f);
         }
 
-        // Refill Countdown
         if (gameTimer < CHEST_REFILL_TIME) {
             int remaining = CHEST_REFILL_TIME - gameTimer;
             if (remaining == 60 || remaining == 30 || remaining == 10 || remaining == 5) {
@@ -195,7 +186,6 @@ public class Game {
             }
         }
 
-        // Win-Condition prüfen
         List<GamePlayer> alivePlayers = getAlivePlayers();
         if (alivePlayers.size() == 1) {
             end(alivePlayers.get(0));
@@ -205,11 +195,9 @@ public class Game {
     }
 
     private void tickEnding() {
-        // Wird von end() gehandhabt
     }
 
     private void tickRestarting() {
-        // Server restart wird extern gehandhabt
     }
 
     public void forceStart() {
@@ -248,7 +236,6 @@ public class Game {
                 broadcast("");
                 broadcast("§8§m                                    ");
 
-                // Stats & Coins
                 plugin.getStatsManager().addWin(winner.getUuid());
                 plugin.getStatsManager().addKills(winner.getUuid(), winner.getKills());
 
@@ -257,10 +244,8 @@ public class Game {
                 plugin.getCore().getCoinManager().addCoins(winner.getUuid(), coinReward);
                 winnerPlayer.sendMessage(SkyWars.PREFIX + "§a+§6" + coinReward + " Coins");
 
-                // Feuerwerk
                 spawnFirework(winnerPlayer.getLocation());
 
-                // Titel
                 winnerPlayer.sendTitle("§6§lVICTORY!", "§7Du hast gewonnen!");
             }
         } else {
@@ -271,7 +256,6 @@ public class Game {
             broadcast("§8§m                                    ");
         }
 
-        // Alle Spieler bekommen Stats
         for (GamePlayer gp : players.values()) {
             if (!gp.getUuid().equals(winner != null ? winner.getUuid() : null)) {
                 plugin.getStatsManager().addLoss(gp.getUuid());
@@ -280,7 +264,6 @@ public class Game {
             }
         }
 
-        // Restart nach 10 Sekunden
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             restart();
         }, 200L);
@@ -307,14 +290,12 @@ public class Game {
             return;
         }
 
-        // Aus Lobby entfernen
         plugin.getLobbyManager().removeFromLobby(player.getUniqueId());
 
         GamePlayer gp = new GamePlayer(player.getUniqueId());
         players.put(player.getUniqueId(), gp);
         alive.add(player.getUniqueId());
 
-        // Spieler zum Arena-Lobby-Spawn teleportieren
         player.teleport(arena.getLobbySpawn());
         player.setGameMode(GameMode.ADVENTURE);
         player.setHealth(20.0);
@@ -322,7 +303,6 @@ public class Game {
         player.getInventory().clear();
         player.getInventory().setArmorContents(null);
 
-        // Lobby-Items geben
         giveLobbyItems(player);
 
         broadcast(plugin.getCore().getRankManager().getRankColor(player) + player.getName() +
@@ -339,7 +319,6 @@ public class Game {
             gp.setAlive(false);
             alive.remove(uuid);
 
-            // Zum Spectator-Spawn teleportieren
             player.teleport(arena.getSpectatorSpawn());
             plugin.getSpectatorManager().addSpectator(player);
 
@@ -349,7 +328,6 @@ public class Game {
             players.remove(uuid);
             alive.remove(uuid);
 
-            // Zurück zur Lobby
             plugin.getLobbyManager().addToLobby(player);
 
             if (state == GameState.LOBBY || state == GameState.STARTING) {
@@ -438,7 +416,6 @@ public class Game {
             }
         }
 
-        // Auch an Spectators
         for (UUID uuid : plugin.getSpectatorManager().getSpectators()) {
             Player p = Bukkit.getPlayer(uuid);
             if (p != null && p.isOnline()) {
@@ -457,7 +434,6 @@ public class Game {
     }
 
     private void spawnFirework(Location loc) {
-        // Firework Effekt für 1.8
         for (int i = 0; i < 5; i++) {
             loc.getWorld().playEffect(loc.clone().add(0, i, 0), Effect.FIREWORKS_SPARK, 1);
         }

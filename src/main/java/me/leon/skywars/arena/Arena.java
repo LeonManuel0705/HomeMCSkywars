@@ -91,7 +91,6 @@ public class Arena {
         spawns.clear();
     }
 
-    // Getters & Setters
     public String getName() { return name; }
     public Location getPos1() { return pos1; }
     public void setPos1(Location pos1) { this.pos1 = pos1; }

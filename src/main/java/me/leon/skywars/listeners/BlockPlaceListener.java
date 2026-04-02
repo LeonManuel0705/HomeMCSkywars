@@ -33,10 +33,8 @@ public class BlockPlaceListener implements Listener {
             return;
         }
 
-        // Platzierte Blöcke tracken für Cleanup
         Material type = event.getBlock().getType();
 
-        // Verbotene Blöcke
         if (type == Material.TNT || type == Material.OBSIDIAN ||
                 type == Material.BEDROCK) {
             event.setCancelled(true);

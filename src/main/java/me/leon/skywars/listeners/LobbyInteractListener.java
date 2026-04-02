@@ -36,7 +36,6 @@ public class LobbyInteractListener implements Listener {
         String displayName = item.getItemMeta().getDisplayName();
 
         if (displayName.contains("Spielen")) {
-            // Auto-Join Game
             if (plugin.getGameManager().getCurrentGame() != null) {
                 plugin.getGameManager().addPlayer(player);
             } else {

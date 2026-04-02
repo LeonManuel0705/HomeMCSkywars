@@ -35,7 +35,6 @@ public class BlockBreakListener implements Listener {
 
         Material type = event.getBlock().getType();
 
-        // Nur erlaubte Blöcke abbauen
         if (type != Material.WOOD && type != Material.LOG && type != Material.LOG_2 &&
                 !type.name().contains("LEAVES") && !type.name().contains("GLASS") &&
                 type != Material.SANDSTONE && type != Material.SAND) {

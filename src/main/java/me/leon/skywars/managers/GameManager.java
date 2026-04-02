@@ -40,7 +40,6 @@ public class GameManager {
             return false;
         }
 
-        // Hole eine verfügbare Arena vom ArenaManager
         Arena arena = plugin.getArenaManager().getRandomArena(me.leon.skywars.arena.ArenaMode.SOLO);
 
         if (arena == null) {
@@ -76,7 +75,6 @@ public class GameManager {
             return;
         }
 
-        // Vanished Spieler nicht hinzufügen
         if (plugin.getCore().getVanishManager().isVanished(player.getUniqueId())) {
             player.teleport(plugin.getMapManager().getLobbySpawn());
             plugin.getSpectatorManager().addSpectator(player);

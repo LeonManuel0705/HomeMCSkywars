@@ -54,7 +54,6 @@ public class PlayerDeathListener implements Listener {
             game.broadcast(victimName + " §7ist gestorben!");
         }
 
-        // Respawn und Spectator
         Bukkit.getScheduler().runTaskLater(plugin, () -> {
             victim.spigot().respawn();
             plugin.getGameManager().removePlayer(victim);
@@ -71,7 +70,6 @@ public class PlayerDeathListener implements Listener {
                 return rankColor + player.getName();
             }
         } catch (Exception e) {
-            // Fallback wenn Core-Plugin nicht verfügbar oder Methode nicht existiert
         }
         return player.getName();
     }

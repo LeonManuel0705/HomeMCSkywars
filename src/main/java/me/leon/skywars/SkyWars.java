@@ -16,7 +16,6 @@ public class SkyWars extends JavaPlugin implements PluginMessageListener {
     private static SkyWars instance;
     private Core core;
 
-    // Manager
     private GameManager gameManager;
     private MapManager mapManager;
     private KitManager kitManager;
@@ -33,7 +32,6 @@ public class SkyWars extends JavaPlugin implements PluginMessageListener {
     public void onEnable() {
         instance = this;
 
-        // Core Plugin holen
         this.core = Core.getInstance();
         if (core == null) {
             getLogger().severe("Core Plugin nicht gefunden! Deaktiviere SkyWars...");
@@ -41,15 +39,12 @@ public class SkyWars extends JavaPlugin implements PluginMessageListener {
             return;
         }
 
-        // Config erstellen
         saveDefaultConfig();
         LocationSerializer.init(this);
 
-        // BungeeCord Messaging aktivieren
         getServer().getMessenger().registerOutgoingPluginChannel(this, "BungeeCord");
         getServer().getMessenger().registerIncomingPluginChannel(this, "BungeeCord", this);
 
-        // Manager initialisieren
         this.arenaManager = new ArenaManager(this);
         this.mapManager = new MapManager(this);
         this.kitManager = new KitManager(this);
@@ -60,7 +55,6 @@ public class SkyWars extends JavaPlugin implements PluginMessageListener {
         this.lobbyManager = new LobbyManager(this);
         this.gameManager = new GameManager(this);
 
-        // Commands registrieren
         registerCommand("start", new StartCommand(this));
         registerCommand("forcestart", new ForceStartCommand(this));
         registerCommand("stop", new StopCommand(this));
@@ -73,7 +67,6 @@ public class SkyWars extends JavaPlugin implements PluginMessageListener {
         registerCommand("build", new BuildCommand(this));
         registerCommand("arena", new ArenaCommand(this));
 
-        // Listeners registrieren
         Bukkit.getPluginManager().registerEvents(new PlayerJoinListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerQuitListener(this), this);
         Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(this), this);
@@ -108,7 +101,6 @@ public class SkyWars extends JavaPlugin implements PluginMessageListener {
             gameManager.shutdown();
         }
 
-        // BungeeCord Messaging deaktivieren
         getServer().getMessenger().unregisterOutgoingPluginChannel(this);
         getServer().getMessenger().unregisterIncomingPluginChannel(this);
 
@@ -120,7 +112,6 @@ public class SkyWars extends JavaPlugin implements PluginMessageListener {
         if (!channel.equals("BungeeCord")) {
             return;
         }
-        // Hier könnten BungeeCord-Nachrichten empfangen werden
     }
 
     private void registerCommand(String name, org.bukkit.command.CommandExecutor executor) {

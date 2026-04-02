@@ -34,7 +34,6 @@ public class LobbyManager {
     public void addToLobby(Player player) {
         playersInLobby.add(player.getUniqueId());
 
-        // Spieler Setup
         player.setGameMode(GameMode.SURVIVAL);
         player.setHealth(20);
         player.setFoodLevel(20);
@@ -50,23 +49,19 @@ public class LobbyManager {
             player.setAllowFlight(false);
         }
 
-        // Zum Lobby Spawn teleportieren
         Location lobbySpawn = plugin.getMapManager().getLobbySpawn();
         if (lobbySpawn != null) {
             player.teleport(lobbySpawn);
         }
 
-        // AutoNick aktivieren wenn vorhanden
         if (plugin.getCore().getNickManager().hasAutoNick(player.getUniqueId())) {
             if (!plugin.getCore().getNickManager().isNicked(player.getUniqueId())) {
                 plugin.getCore().getNickManager().nickPlayer(player);
             }
         }
 
-        // Lobby Items geben
         giveLobbyItems(player);
 
-        // Scoreboard & Tablist updaten
         updateScoreboard(player);
         updateTablist(player);
     }
@@ -77,7 +72,6 @@ public class LobbyManager {
         if (player != null && player.isOnline()) {
             player.getScoreboard().clearSlot(DisplaySlot.SIDEBAR);
 
-            // AutoNick deaktivieren
             if (plugin.getCore().getNickManager().isNicked(uuid)) {
                 plugin.getCore().getNickManager().unnickPlayer(player);
             }
@@ -85,21 +79,18 @@ public class LobbyManager {
     }
 
     public void giveLobbyItems(Player player) {
-        // Spielen Item (Slot 0)
         ItemStack play = new ItemStack(Material.COMPASS);
         ItemMeta playMeta = play.getItemMeta();
         playMeta.setDisplayName("§a§lSpielen §7(Rechtsklick)");
         playMeta.setLore(Arrays.asList("§7Tritt einem Spiel bei!"));
         play.setItemMeta(playMeta);
 
-        // Stats Item (Slot 4)
         ItemStack stats = new ItemStack(Material.PAPER);
         ItemMeta statsMeta = stats.getItemMeta();
         statsMeta.setDisplayName("§6§lStatistiken §7(Rechtsklick)");
         statsMeta.setLore(Arrays.asList("§7Zeige deine Stats an!"));
         stats.setItemMeta(statsMeta);
 
-        // Zurück zur Lobby Item (Slot 8)
         ItemStack leave = new ItemStack(Material.INK_SACK, 1, (short) 1);
         ItemMeta leaveMeta = leave.getItemMeta();
         leaveMeta.setDisplayName("§c§lZurück zur Lobby §7(Rechtsklick)");
@@ -148,7 +139,6 @@ public class LobbyManager {
         setScore(obj, "§fOnline: §a" + playersInLobby.size(), line--);
         setScore(obj, "§2", line--);
 
-        // Game Status anzeigen
         if (plugin.getGameManager().getCurrentGame() != null) {
             GameState state = plugin.getGameManager().getCurrentGame().getState();
             String status = getGameStatus(state);
@@ -159,7 +149,6 @@ public class LobbyManager {
 
         setScore(obj, "§3", line--);
 
-        // Player Stats
         int kills = plugin.getStatsManager().getKills(player.getUniqueId());
         int deaths = plugin.getStatsManager().getDeaths(player.getUniqueId());
         int wins = plugin.getStatsManager().getWins(player.getUniqueId());

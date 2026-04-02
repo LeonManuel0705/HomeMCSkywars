@@ -80,7 +80,6 @@ public class ArenaManager {
         arena.setLobbySpawn(lobby);
         arena.setSpectatorSpawn(spectator);
 
-        // Spawns laden
         List<String> spawnStrings = arenaConfig.getStringList(path + "spawns");
         for (String spawnStr : spawnStrings) {
             Location spawn = deserializeLocation(spawnStr);
@@ -89,7 +88,6 @@ public class ArenaManager {
             }
         }
 
-        // Truhen scannen
         arena.scanChests();
 
         return arena;

@@ -9,7 +9,6 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-// ArenaCommand.java - Haupt-Arena-Command
 public class ArenaCommand implements CommandExecutor {
     private final SkyWars plugin;
 
@@ -242,7 +241,6 @@ public class ArenaCommand implements CommandExecutor {
         arena.setPos2(player.getLocation());
         plugin.getArenaManager().saveArenas();
 
-        // Automatisch Truhen scannen nach setzen von Pos2
         arena.scanChests();
         player.sendMessage(SkyWars.PREFIX + "§aPosition 2 gesetzt!");
         player.sendMessage(SkyWars.PREFIX + "§7Truhen gescannt: §e" + arena.getChests().size());

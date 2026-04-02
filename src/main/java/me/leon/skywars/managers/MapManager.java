@@ -23,14 +23,12 @@ public class MapManager {
     private void loadLocations() {
         FileConfiguration config = plugin.getConfig();
 
-        // Lobby Spawn laden
         if (config.contains("lobby-spawn")) {
             String serialized = config.getString("lobby-spawn");
             lobbySpawn = LocationSerializer.deserialize(serialized);
             plugin.getLogger().info("Lobby-Spawn geladen: " + lobbySpawn);
         }
 
-        // Spawn Locations laden
         if (config.contains("spawns")) {
             List<String> spawns = config.getStringList("spawns");
             for (String spawn : spawns) {

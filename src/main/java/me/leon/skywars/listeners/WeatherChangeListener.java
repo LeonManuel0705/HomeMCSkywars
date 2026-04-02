@@ -15,7 +15,5 @@ public class WeatherChangeListener implements Listener {
 
     @EventHandler
     public void onWeatherChange(WeatherChangeEvent event) {
-        // Wetter-Änderungen durch Voting erlauben
-        // Aber automatische Änderungen verhindern wenn kein Vote aktiv
     }
 }

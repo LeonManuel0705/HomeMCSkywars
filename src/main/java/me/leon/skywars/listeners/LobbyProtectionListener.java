@@ -27,18 +27,15 @@ public class LobbyProtectionListener implements Listener {
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
 
-        // Build-Mode Check
         if (plugin.getGameManager().isInBuildMode(player)) {
             return;
         }
 
-        // In der Lobby nicht abbauen
         if (plugin.getLobbyManager().isInLobby(player.getUniqueId())) {
             event.setCancelled(true);
             return;
         }
 
-        // Im Spiel nur während INGAME abbauen
         if (plugin.getGameManager().isInGame(player)) {
             if (plugin.getGameManager().getCurrentGame().getState() != GameState.INGAME) {
                 event.setCancelled(true);
@@ -50,18 +47,15 @@ public class LobbyProtectionListener implements Listener {
     public void onBlockPlace(BlockPlaceEvent event) {
         Player player = event.getPlayer();
 
-        // Build-Mode Check
         if (plugin.getGameManager().isInBuildMode(player)) {
             return;
         }
 
-        // In der Lobby nicht platzieren
         if (plugin.getLobbyManager().isInLobby(player.getUniqueId())) {
             event.setCancelled(true);
             return;
         }
 
-        // Im Spiel nur während INGAME platzieren
         if (plugin.getGameManager().isInGame(player)) {
             if (plugin.getGameManager().getCurrentGame().getState() != GameState.INGAME) {
                 event.setCancelled(true);
@@ -75,13 +69,11 @@ public class LobbyProtectionListener implements Listener {
 
         Player player = (Player) event.getEntity();
 
-        // In der Lobby kein Schaden
         if (plugin.getLobbyManager().isInLobby(player.getUniqueId())) {
             event.setCancelled(true);
             return;
         }
 
-        // Im Spiel nur während INGAME Schaden nehmen
         if (plugin.getGameManager().isInGame(player)) {
             if (plugin.getGameManager().getCurrentGame().getState() != GameState.INGAME) {
                 event.setCancelled(true);
@@ -97,14 +89,12 @@ public class LobbyProtectionListener implements Listener {
         Player damager = (Player) event.getDamager();
         Player victim = (Player) event.getEntity();
 
-        // In der Lobby kein PvP
         if (plugin.getLobbyManager().isInLobby(damager.getUniqueId()) ||
                 plugin.getLobbyManager().isInLobby(victim.getUniqueId())) {
             event.setCancelled(true);
             return;
         }
 
-        // Im Spiel nur während INGAME PvP
         if (plugin.getGameManager().isInGame(damager) || plugin.getGameManager().isInGame(victim)) {
             if (plugin.getGameManager().getCurrentGame().getState() != GameState.INGAME) {
                 event.setCancelled(true);
@@ -118,13 +108,11 @@ public class LobbyProtectionListener implements Listener {
 
         Player player = (Player) event.getEntity();
 
-        // In der Lobby kein Hunger
         if (plugin.getLobbyManager().isInLobby(player.getUniqueId())) {
             event.setCancelled(true);
             return;
         }
 
-        // Im Spiel nur während INGAME Hunger
         if (plugin.getGameManager().isInGame(player)) {
             if (plugin.getGameManager().getCurrentGame().getState() != GameState.INGAME) {
                 event.setCancelled(true);
@@ -136,13 +124,11 @@ public class LobbyProtectionListener implements Listener {
     public void onItemDrop(PlayerDropItemEvent event) {
         Player player = event.getPlayer();
 
-        // In der Lobby keine Items droppen
         if (plugin.getLobbyManager().isInLobby(player.getUniqueId())) {
             event.setCancelled(true);
             return;
         }
 
-        // Im Spiel nur während INGAME Items droppen
         if (plugin.getGameManager().isInGame(player)) {
             if (plugin.getGameManager().getCurrentGame().getState() != GameState.INGAME) {
                 event.setCancelled(true);
@@ -154,13 +140,11 @@ public class LobbyProtectionListener implements Listener {
     public void onItemPickup(PlayerPickupItemEvent event) {
         Player player = event.getPlayer();
 
-        // In der Lobby keine Items aufheben
         if (plugin.getLobbyManager().isInLobby(player.getUniqueId())) {
             event.setCancelled(true);
             return;
         }
 
-        // Im Spiel nur während INGAME Items aufheben
         if (plugin.getGameManager().isInGame(player)) {
             if (plugin.getGameManager().getCurrentGame().getState() != GameState.INGAME) {
                 event.setCancelled(true);
@@ -170,7 +154,6 @@ public class LobbyProtectionListener implements Listener {
 
     @EventHandler
     public void onWeatherChange(WeatherChangeEvent event) {
-        // Wetter immer schön halten
         if (event.toWeatherState()) {
             event.setCancelled(true);
         }

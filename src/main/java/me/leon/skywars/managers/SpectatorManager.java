@@ -33,7 +33,6 @@ public class SpectatorManager {
             player.removePotionEffect(effect.getType());
         }
 
-        // Alle Spieler ausblenden
         for (Player online : Bukkit.getOnlinePlayers()) {
             if (!spectators.contains(online.getUniqueId())) {
                 player.hidePlayer(online);
@@ -50,7 +49,6 @@ public class SpectatorManager {
         player.setAllowFlight(false);
         player.setFlying(false);
 
-        // Alle Spieler wieder anzeigen
         for (Player online : Bukkit.getOnlinePlayers()) {
             player.showPlayer(online);
         }

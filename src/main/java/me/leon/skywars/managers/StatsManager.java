@@ -69,7 +69,6 @@ public class StatsManager {
                     );
                     statsCache.put(uuid, stats);
                 } else {
-                    // Erstelle neuen Eintrag
                     createStats(uuid);
                     statsCache.put(uuid, new PlayerStats(0, 0, 0, 0, 0));
                 }
@@ -150,7 +149,6 @@ public class StatsManager {
 
         Inventory inv = Bukkit.createInventory(null, 27, "§6§l" + target.getName() + " Stats");
 
-        // Kopf
         ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
         skullMeta.setOwner(target.getName());
@@ -159,7 +157,6 @@ public class StatsManager {
         skull.setItemMeta(skullMeta);
         inv.setItem(4, skull);
 
-        // Stats
         inv.setItem(10, createStatItem(Material.DIAMOND, "§aGewinne", stats.wins));
         inv.setItem(12, createStatItem(Material.REDSTONE, "§cNiederlagen", stats.losses));
         inv.setItem(14, createStatItem(Material.IRON_SWORD, "§eKills", stats.kills));
@@ -256,7 +253,6 @@ public class StatsManager {
         return stats.deaths > 0 ? (double) stats.kills / stats.deaths : stats.kills;
     }
 
-    // Überladene showStats Methode für UUID statt Player
     public void showStats(Player viewer, UUID targetUUID) {
         PlayerStats stats = statsCache.get(targetUUID);
         if (stats == null) {
@@ -264,13 +260,11 @@ public class StatsManager {
             return;
         }
 
-        // Name des Targets holen
         Player target = Bukkit.getPlayer(targetUUID);
         String targetName = target != null ? target.getName() : "Unbekannt";
 
         Inventory inv = Bukkit.createInventory(null, 27, "§6§l" + targetName + " Stats");
 
-        // Kopf
         ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
         SkullMeta skullMeta = (SkullMeta) skull.getItemMeta();
         skullMeta.setOwner(targetName);
@@ -282,7 +276,6 @@ public class StatsManager {
         skull.setItemMeta(skullMeta);
         inv.setItem(4, skull);
 
-        // Stats
         inv.setItem(10, createStatItem(Material.DIAMOND, "§aGewinne", stats.wins));
         inv.setItem(12, createStatItem(Material.REDSTONE, "§cNiederlagen", stats.losses));
         inv.setItem(14, createStatItem(Material.IRON_SWORD, "§eKills", stats.kills));
@@ -294,10 +287,7 @@ public class StatsManager {
         viewer.openInventory(inv);
     }
 
-    // Methode für saveStats (falls später benötigt, aktuell nicht genutzt)
     public void saveStats(UUID uuid) {
-        // Stats werden bereits async durch addStat() gespeichert
-        // Diese Methode kann leer bleiben oder für manuelles Speichern verwendet werden
         PlayerStats stats = statsCache.get(uuid);
         if (stats == null) return;
 

@@ -22,11 +22,9 @@ public class KitManager {
     }
 
     private void loadKits() {
-        // Default Kit (für alle)
         kits.put("default", new Kit("default", "§7Standard", Material.STONE_SWORD,
                 "skywars.kit.default", new ArrayList<>()));
 
-        // Warrior Kit
         List<ItemStack> warriorItems = Arrays.asList(
                 createItem(Material.STONE_SWORD, 1, 0, "§cKrieger Schwert", null),
                 createItem(Material.CHAINMAIL_CHESTPLATE, 1, 0, null, null),
@@ -35,7 +33,6 @@ public class KitManager {
         kits.put("warrior", new Kit("warrior", "§cKrieger", Material.IRON_SWORD,
                 "skywars.kit.warrior", warriorItems));
 
-        // Archer Kit
         List<ItemStack> archerItems = Arrays.asList(
                 createItem(Material.BOW, 1, 0, "§aBogen", null),
                 createItem(Material.ARROW, 16, 0, null, null),
@@ -44,7 +41,6 @@ public class KitManager {
         kits.put("archer", new Kit("archer", "§aSchütze", Material.BOW,
                 "skywars.kit.archer", archerItems));
 
-        // Tank Kit
         List<ItemStack> tankItems = Arrays.asList(
                 createItem(Material.WOOD_SWORD, 1, 0, null, null),
                 createItem(Material.IRON_CHESTPLATE, 1, 0, null, null),
@@ -54,7 +50,6 @@ public class KitManager {
         kits.put("tank", new Kit("tank", "§9Tank", Material.IRON_CHESTPLATE,
                 "skywars.kit.tank", tankItems));
 
-        // Scout Kit
         List<ItemStack> scoutItems = Arrays.asList(
                 createItem(Material.WOOD_SWORD, 1, 0, null, null),
                 createItem(Material.LEATHER_BOOTS, 1, 0, "§eSchnelle Stiefel",
@@ -63,7 +58,6 @@ public class KitManager {
         kits.put("scout", new Kit("scout", "§eKundschafter", Material.LEATHER_BOOTS,
                 "skywars.kit.scout", scoutItems));
 
-        // Miner Kit
         List<ItemStack> minerItems = Arrays.asList(
                 createItem(Material.STONE_PICKAXE, 1, 0, null, null),
                 createItem(Material.STONE_AXE, 1, 0, null, null),
@@ -72,16 +66,14 @@ public class KitManager {
         kits.put("miner", new Kit("miner", "§6Bergarbeiter", Material.STONE_PICKAXE,
                 "skywars.kit.miner", minerItems));
 
-        // Alchemist Kit (VIP+)
         List<ItemStack> alchemistItems = Arrays.asList(
                 createItem(Material.WOOD_SWORD, 1, 0, null, null),
-                createItem(Material.POTION, 1, 16389, "§dSchnelligkeitstrank", null), // Speed II
-                createItem(Material.POTION, 1, 16385, "§cHeilungstrank", null) // Instant Health
+                createItem(Material.POTION, 1, 16389, "§dSchnelligkeitstrank", null),
+                createItem(Material.POTION, 1, 16385, "§cHeilungstrank", null)
         );
         kits.put("alchemist", new Kit("alchemist", "§dAlchemist", Material.POTION,
                 "homemc.vip", alchemistItems));
 
-        // Pyro Kit (MVP+)
         List<ItemStack> pyroItems = Arrays.asList(
                 createItem(Material.FLINT_AND_STEEL, 1, 0, null, null),
                 createItem(Material.LAVA_BUCKET, 1, 0, null, null),
@@ -90,7 +82,6 @@ public class KitManager {
         kits.put("pyro", new Kit("pyro", "§6Pyromane", Material.FLINT_AND_STEEL,
                 "homemc.mvp", pyroItems));
 
-        // Knight Kit (Legend+)
         List<ItemStack> knightItems = Arrays.asList(
                 createItem(Material.IRON_SWORD, 1, 0, "§bRitter Schwert", null),
                 createItem(Material.DIAMOND_CHESTPLATE, 1, 0, null, null),

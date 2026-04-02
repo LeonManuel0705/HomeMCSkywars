@@ -23,7 +23,6 @@ public class PlayerJoinListener implements Listener {
 
         Game game = plugin.getGameManager().getCurrentGame();
 
-        // Vanished Spieler direkt als Spectator
         if (plugin.getCore().getVanishManager().isVanished(player.getUniqueId())) {
             if (game != null) {
                 plugin.getSpectatorManager().addSpectator(player);
@@ -33,21 +32,17 @@ public class PlayerJoinListener implements Listener {
             return;
         }
 
-        // Spiel existiert und ist in LOBBY oder STARTING
         if (game != null && (game.getState() == GameState.LOBBY || game.getState() == GameState.STARTING)) {
             plugin.getGameManager().addPlayer(player);
         }
-        // Spiel läuft bereits (INGAME, ENDING, RESTARTING)
         else if (game != null) {
             plugin.getSpectatorManager().addSpectator(player);
             player.sendMessage(SkyWars.PREFIX + "§7Das Spiel läuft bereits! Du wurdest als Zuschauer hinzugefügt.");
         }
-        // Kein Spiel vorhanden - Lobby
         else {
             plugin.getLobbyManager().addToLobby(player);
         }
 
-        // Stats laden
         plugin.getStatsManager().loadStats(player.getUniqueId());
     }
 }

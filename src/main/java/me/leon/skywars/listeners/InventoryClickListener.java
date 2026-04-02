@@ -27,7 +27,6 @@ public class InventoryClickListener implements Listener {
 
         if (clicked == null || clicked.getType() == Material.AIR) return;
 
-        // Kit Selector
         if (title.equals("§6§lKit Auswahl")) {
             event.setCancelled(true);
 
@@ -35,7 +34,6 @@ public class InventoryClickListener implements Listener {
 
             String kitName = clicked.getItemMeta().getDisplayName();
 
-            // Finde Kit ID
             String kitId = null;
             for (me.leon.skywars.managers.KitManager.Kit kit : plugin.getKitManager().getKits()) {
                 if (kit.getDisplayName().equals(kitName)) {
@@ -57,7 +55,6 @@ public class InventoryClickListener implements Listener {
             }
         }
 
-        // Vote Menu
         else if (title.equals("§6§lAbstimmung")) {
             event.setCancelled(true);
 
@@ -74,7 +71,6 @@ public class InventoryClickListener implements Listener {
             }
         }
 
-        // Zeit Vote
         else if (title.equals("§eZeit")) {
             event.setCancelled(true);
 
@@ -87,7 +83,6 @@ public class InventoryClickListener implements Listener {
             player.closeInventory();
         }
 
-        // Wetter Vote
         else if (title.equals("§bWetter")) {
             event.setCancelled(true);
 
@@ -100,7 +95,6 @@ public class InventoryClickListener implements Listener {
             player.closeInventory();
         }
 
-        // Chest Vote
         else if (title.equals("§6Truhen")) {
             event.setCancelled(true);
 
@@ -113,7 +107,6 @@ public class InventoryClickListener implements Listener {
             player.closeInventory();
         }
 
-        // Stats GUI
         else if (title.contains("Stats")) {
             event.setCancelled(true);
         }

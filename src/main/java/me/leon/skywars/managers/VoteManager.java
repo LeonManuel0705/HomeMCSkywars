@@ -12,7 +12,7 @@ import java.util.*;
 public class VoteManager {
 
     private final SkyWars plugin;
-    private final Map<String, Map<UUID, String>> votes; // category -> (player -> choice)
+    private final Map<String, Map<UUID, String>> votes;
 
     public VoteManager(SkyWars plugin) {
         this.plugin = plugin;
@@ -25,15 +25,12 @@ public class VoteManager {
     public void openVoteMenu(Player player) {
         Inventory inv = Bukkit.createInventory(null, 27, "§6§lAbstimmung");
 
-        // Zeit
         inv.setItem(10, createVoteItem(Material.WATCH, "§eZeit",
                 player.hasPermission("skywars.vote.time")));
 
-        // Wetter
         inv.setItem(12, createVoteItem(Material.WATER_BUCKET, "§bWetter",
                 player.hasPermission("skywars.vote.weather")));
 
-        // Chest-Füllung
         inv.setItem(14, createVoteItem(Material.CHEST, "§6Truhen",
                 player.hasPermission("skywars.vote.chest")));
 
@@ -95,7 +92,6 @@ public class VoteManager {
     public void applyVotes() {
         World world = Bukkit.getWorlds().get(0);
 
-        // Zeit
         String timeChoice = getMostVoted("time");
         if (timeChoice != null) {
             switch (timeChoice) {
@@ -114,7 +110,6 @@ public class VoteManager {
             }
         }
 
-        // Wetter
         String weatherChoice = getMostVoted("weather");
         if (weatherChoice != null) {
             switch (weatherChoice) {
@@ -133,7 +128,6 @@ public class VoteManager {
             }
         }
 
-        // Chest-Level wird vom ChestManager verwendet
         String chestChoice = getMostVoted("chest");
         if (chestChoice != null) {
             plugin.getChestManager().setChestLevel(chestChoice);

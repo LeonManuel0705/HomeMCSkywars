@@ -34,7 +34,6 @@ public class PlayerInteractListener implements Listener {
         if (plugin.getLobbyManager().isInLobby(player.getUniqueId())) {
             event.setCancelled(true);
 
-            // Spielen Item (Compass)
             if (item.getType() == Material.COMPASS && displayName.contains("Spielen")) {
                 if (plugin.getGameManager().getCurrentGame() != null) {
                     plugin.getLobbyManager().removeFromLobby(player.getUniqueId());
@@ -44,23 +43,19 @@ public class PlayerInteractListener implements Listener {
                 }
             }
 
-            // Stats Item (Paper)
             else if (item.getType() == Material.PAPER && displayName.contains("Statistiken")) {
                 plugin.getStatsManager().showStats(player, player);
             }
 
-            // Zurück zur Lobby (Red Dye)
             else if (item.getType() == Material.INK_SACK && displayName.contains("Zurück zur Lobby")) {
                 plugin.getLobbyManager().sendToMainLobby(player);
             }
             return;
         }
 
-        // Game Items (wenn Spieler im Spiel ist)
         Game game = plugin.getGameManager().getCurrentGame();
         if (game == null) return;
 
-        // Nur in LOBBY und STARTING Phase Items nutzbar
         if (game.getState() == GameState.LOBBY || game.getState() == GameState.STARTING) {
             event.setCancelled(true);
 
@@ -72,6 +67,5 @@ public class PlayerInteractListener implements Listener {
                 plugin.getVoteManager().openVoteMenu(player);
             }
         }
-        // INGAME Phase - normale Interaktionen erlaubt, keine Cancellation
     }
 }
